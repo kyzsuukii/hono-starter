@@ -1,0 +1,25 @@
+{
+	"name": "hono-starter",
+	"type": "module",
+	"scripts": {
+		"dev": "bun run --hot src/index.ts | pino-pretty",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "tsx schema/migrate.ts",
+		"db:drop": "drizzle-kit drop"
+	},
+	"dependencies": {
+		"dotenv": "^16.4.5",
+		"drizzle-orm": "^0.32.2",
+		"hono": "^4.5.4",
+		"http-status-codes": "^2.3.0",
+		"mysql2": "^3.11.0",
+		"pino": "^9.3.2",
+		"zod": "^3.23.8"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"drizzle-kit": "^0.23.2",
+		"pino-pretty": "^11.2.2",
+		"tsx": "^4.16.5"
+	}
+}
