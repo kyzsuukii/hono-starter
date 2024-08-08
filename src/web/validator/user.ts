@@ -30,7 +30,19 @@ const updateProfileSchema = z.object({
 const updateProfileValidation = validator("json", (value, ctx) => {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const validate = (ctx: Context, schema: ZodObject<any>, value: any) => {
-		const parsed = schema.safeParse(value);
+		const providedKeys = Object.keys(value);
+		if (providedKeys.length === 0) {
+			return serveUnprocessableEntity(ctx, ERRORS.INVALID_VALUE);
+		}
+
+		const pickKeys = providedKeys.reduce((acc, key) => {
+            acc[key] = true;
+            return acc;
+        }, {} as Record<string, true>);
+
+		const partialSchema = schema.partial().pick(pickKeys);
+
+		const parsed = partialSchema.safeParse(value);
 		if (!parsed.success) {
 			return serveUnprocessableEntity(ctx, ERRORS.INVALID_VALUE);
 		}
