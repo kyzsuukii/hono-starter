@@ -6,8 +6,6 @@ import {
 import { UserRepository } from "./repository/user";
 import { UserService } from "./services/user";
 import { AuthController } from "./controller/auth";
-import { jwt } from "hono/jwt";
-import { env } from "../lib/env";
 import { loginValidation, registerValidation } from "./validator/user";
 
 export class Routes {
@@ -18,7 +16,6 @@ export class Routes {
 	}
 
 	public init() {
-
 		this.app.notFound((ctx) => serveNotFound(ctx));
 
 		this.app.onError((ctx, error) => serveInternalServerError(error, ctx));
