@@ -28,7 +28,7 @@ const serveUnauthorized = (c: Context) => {
 	);
 };
 
-const serveInternalServerError = (c: Context, error: Error) => {
+const serveInternalServerError = (c: Context, error: unknown) => {
 	if (error instanceof HTTPException) {
 		return c.json({ error: error.message }, <StatusCode>error.status);
 	}
@@ -43,11 +43,17 @@ const serveError = (c: Context, status: StatusCodes, message: string) => {
 	return c.json({ error: message }, <StatusCode>status);
 };
 
+enum ERRORS {
+	USER_EXISTS = "User already exists",
+	USER_NOT_FOUND = "User not found",
+}
+
 export {
-    serveNotFound,
-    serveBadRequest,
-    serveUnprocessableEntity,
-    serveUnauthorized,
-    serveInternalServerError,
-    serveError,
+	ERRORS,
+	serveNotFound,
+	serveBadRequest,
+	serveUnprocessableEntity,
+	serveUnauthorized,
+	serveInternalServerError,
+	serveError,
 };
