@@ -46,6 +46,7 @@ const serveError = (c: Context, status: StatusCodes, message: string) => {
 enum ERRORS {
 	USER_EXISTS = "User already exists",
 	USER_NOT_FOUND = "User not found",
+	INVALID_VALUE = "Invalid value",
 }
 
 export {

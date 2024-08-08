@@ -1,4 +1,5 @@
 import { encrypt } from "../../lib/crypto";
+import type { UpdateUser } from "../../lib/types";
 import type { UserRepository } from "../repository/user";
 
 export class UserService {
@@ -22,5 +23,13 @@ export class UserService {
 
 	public async find(id: number) {
 		return this.repo.find(id);
+	}
+
+	public async updateByEmail(email: string, user: Partial<UpdateUser>) {
+		if (user.password) {
+			user.password = encrypt(user.password);
+		}
+
+		return this.repo.updateByEmail(email, user);
 	}
 }

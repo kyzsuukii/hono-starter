@@ -6,7 +6,12 @@ import {
 import { UserRepository } from "./repository/user";
 import { UserService } from "./services/user";
 import { AuthController } from "./controller/auth";
-import { loginValidation, registerValidation } from "./validator/user";
+import {
+	loginValidation,
+	registerValidation,
+	updateProfileValidation,
+} from "./validator/user";
+import { ProfileController } from "./controller/profile";
 
 export class Routes {
 	private app: Hono;
@@ -31,6 +36,10 @@ export class Routes {
 		const authController = new AuthController(userService);
 
 		this.initAuthRoutes(api, authController);
+
+		const profileController = new ProfileController(userService);
+
+		this.initProfileRoutes(api, profileController);
 	}
 
 	private initAuthRoutes(api: Hono, authController: AuthController): void {
@@ -41,5 +50,20 @@ export class Routes {
 		api.post("/register", registerValidation, authController.register);
 
 		api.route("/auth", auth);
+	}
+
+	private initProfileRoutes(
+		api: Hono,
+		profileController: ProfileController,
+	): void {
+		const profile = new Hono();
+
+		profile.put(
+			"/userinfo/update",
+			updateProfileValidation,
+			profileController.update,
+		);
+
+		api.route("/auth", profile);
 	}
 }

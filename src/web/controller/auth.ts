@@ -64,7 +64,7 @@ export class AuthController {
 
 		const user = await this.service.findByEmail(body.email);
 		if (!user) {
-            return serveInternalServerError(ctx, new Error(ERRORS.USER_NOT_FOUND));
+            return serveInternalServerError(ctx, ERRORS.USER_NOT_FOUND);
         }
 
         const token = await createToken(user.id, user.email);
@@ -80,7 +80,7 @@ export class AuthController {
 		const payload: Payload = ctx.get("jwtPayload");
 		const user = await this.service.findByEmail(payload.email as string);
 		if (!user) {
-			return serveInternalServerError(ctx, new Error(ERRORS.USER_NOT_FOUND));
+			return serveInternalServerError(ctx, ERRORS.USER_NOT_FOUND);
 		}
 
 		const serializedUser = serializeUser(user);
