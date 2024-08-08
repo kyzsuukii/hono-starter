@@ -1,7 +1,7 @@
 import type { User } from "../../../lib/db";
 
 type UserResponse = {
-    id: number;
+    id: string;
     name: string;
     email: string;
     createdAt: Date | null;

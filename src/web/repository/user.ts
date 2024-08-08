@@ -8,7 +8,7 @@ export class UserRepository {
 		return db.insert(userSchema).values(user);
 	}
 
-	public async find(id: number) {
+	public async find(id: string) {
 		return db.query.userSchema.findFirst({
 			where: eq(userSchema.id, id),
 		});

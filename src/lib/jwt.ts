@@ -6,7 +6,7 @@ type Payload = {
 	exp?: number;
 };
 
-const createToken = async (id: number, email: string) => {
+const createToken = async (id: string, email: string) => {
 	const payload: Payload = {
 		sub: id,
 		email,

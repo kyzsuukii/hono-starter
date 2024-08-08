@@ -8,6 +8,13 @@
       "when": 1723039728412,
       "tag": "0000_curved_emma_frost",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1723143122744,
+      "tag": "0001_colorful_winter_soldier",
+      "breakpoints": true
     }
   ]
 }

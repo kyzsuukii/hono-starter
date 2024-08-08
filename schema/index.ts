@@ -1,7 +1,7 @@
-import { mysqlTable, serial, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { mysqlTable, timestamp, varchar } from "drizzle-orm/mysql-core";
 
 export const userSchema = mysqlTable("user", {
-	id: serial("id").primaryKey(),
+	id: varchar("id", { length: 36 }).notNull().primaryKey(),
 	name: varchar("name", { length: 50 }).notNull(),
 	email: varchar("email", { length: 100 }).notNull().unique(),
 	password: varchar("password", { length: 65 }).notNull(),
