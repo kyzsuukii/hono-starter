@@ -21,4 +21,4 @@ const verifyToken = async (token: string): Promise<Payload> => {
 	return payload;
 };
 
-export { createToken, verifyToken };
+export { createToken, verifyToken, type Payload };
